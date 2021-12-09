@@ -1,0 +1,9 @@
+.idea
+*.iml
+
+coverage
+*.lcov
+
+node_modules/
+node/
+dist/

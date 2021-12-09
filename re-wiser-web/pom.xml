@@ -53,7 +53,7 @@
                         <phase>generate-resources</phase>
 
                         <configuration>
-                            <arguments>run prod</arguments>
+                            <arguments>run build</arguments>
                         </configuration>
                     </execution>
                 </executions>
