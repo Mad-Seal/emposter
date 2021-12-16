@@ -12,28 +12,10 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import {Rows} from "./Rows";
 
-function createData(
-    id: number,
-    from: string,
-    to: string,
-    subject: string,
-    message: string,
-    date: string,
-    attachments: Array<Attachment>
-) {
-    return {
-        id,
-        from,
-        to,
-        subject,
-        message,
-        date,
-        attachments
-    };
-}
 
-function Row(props: { row: ReturnType<typeof createData> }) {
+function Row(props: { row: Rows }) {
     const {row} = props;
     const [open, setOpen] = React.useState(false);
 
@@ -87,38 +69,15 @@ function Row(props: { row: ReturnType<typeof createData> }) {
     );
 }
 
-const attachments =
-    [
-        {
-            name: 'important file 1',
-            id: 11091700,
-        },
-        {
-            name: 'important file 1',
-            id: 23452,
-        },
-    ];
 
-type Attachment = {
-    id: number,
-    name: string
-
-};
-
-const rows = [
-    createData(1, 'from', 'to', 'subject', 'message', 'today', attachments),
-    createData(2, 'from', 'to', 'subject', 'message', 'today', attachments),
-    createData(3, 'from', 'to', 'subject', 'message', 'today', attachments),
-];
-
-export default function CollapsibleTable() {
+export default function CollapsibleTable(props: { rows: Array<Rows> }) {
     return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
                         <TableCell/>
-                        <TableCell>Id</TableCell>
+                        <TableCell align="right">Id</TableCell>
                         <TableCell align="right">From</TableCell>
                         <TableCell align="right">To</TableCell>
                         <TableCell align="right">Subject</TableCell>
@@ -126,7 +85,7 @@ export default function CollapsibleTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {props.rows.map((row) => (
                         <Row key={row.id} row={row}/>
                     ))}
                 </TableBody>

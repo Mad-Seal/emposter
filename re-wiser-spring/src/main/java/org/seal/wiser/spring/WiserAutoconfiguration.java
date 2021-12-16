@@ -22,8 +22,8 @@ public class WiserAutoconfiguration {
     }
 
     @Bean
-    public ReWiser wiser() {
-        return smtpServiceFactory().wiser(wiserProperties(), messageBackend());
+    public ReWiser wiser(MessageBackend messageBackendBean) {
+        return smtpServiceFactory().wiser(wiserProperties(), messageBackendBean);
     }
 
     @Bean
@@ -38,6 +38,7 @@ public class WiserAutoconfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public MessageBackend messageBackend() {
         return new MessageUpdateTrackingBackend(new InMemoryMessageBackend(), (message) -> {
             LoggerFactory.getLogger(WiserAutoconfiguration.class).info(message.toString());

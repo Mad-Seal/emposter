@@ -13,7 +13,7 @@ public class ReWiserMessage {
     private String envelopeSender;
     private String envelopeReceiver;
 
-    ReWiserMessage(Session session, String envelopeSender, String envelopeReceiver, byte[] messageData) {
+    public ReWiserMessage(Session session, String envelopeSender, String envelopeReceiver, byte[] messageData) {
         this.session = session;
         this.envelopeSender = envelopeSender;
         this.envelopeReceiver = envelopeReceiver;
