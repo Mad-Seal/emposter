@@ -76,12 +76,12 @@ export default function CollapsibleTable(props: { rows: Array<Rows> }) {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell/>
-                        <TableCell align="right">Id</TableCell>
-                        <TableCell align="right">From</TableCell>
-                        <TableCell align="right">To</TableCell>
-                        <TableCell align="right">Subject</TableCell>
-                        <TableCell align="right">Date</TableCell>
+                        <TableCell style={{width: "5%"}}/>
+                        <TableCell style={{width: "10%"}} align="right">Id</TableCell>
+                        <TableCell style={{width: "15%"}} align="right">From</TableCell>
+                        <TableCell style={{width: "20%"}} align="right">To</TableCell>
+                        <TableCell style={{width: "40%"}} align="right">Subject</TableCell>
+                        <TableCell style={{width: "10%"}} align="right">Date</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
