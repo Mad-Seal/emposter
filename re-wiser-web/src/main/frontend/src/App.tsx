@@ -1,25 +1,35 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import CollapsibleTable from "./CollapsibleTable";
-import {GetMessages} from "./Services";
+import {GetCanPurge, GetMessages, Purge} from "./Services";
 import {Button} from "@mui/material";
-import {Rows} from "./Rows";
+import {Email} from "./Email";
 
 function App() {
 
-    const [messages, setMessages] = useState<Rows[]>([]);
+    const [emails, setEmails] = useState<Email[]>([]);
+    const [canPurge, setCanPurge] = useState(false);
+
+    useEffect(() => {
+        GetCanPurge()
+            .then(canPurge => {
+                setCanPurge(canPurge)
+            })
+    })
 
     const onClick = () => {
         GetMessages()
             .then(({data}) => {
-                setMessages(data);
+                setEmails(data);
             })
     }
+
     return (
         <div className="App">
             <Button onClick={() => onClick()}>Refresh</Button>
+            <Button disabled={!canPurge} onClick={() => Purge()}>Purge</Button>
             <div style={{height: 400, width: '90%', margin: '5%'}}>
-                <CollapsibleTable rows={messages}/>
+                <CollapsibleTable rows={emails}/>
             </div>
         </div>
     );

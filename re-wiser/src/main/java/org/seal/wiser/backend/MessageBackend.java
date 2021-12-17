@@ -6,9 +6,9 @@ import java.util.Collection;
 
 public interface MessageBackend {
 
-    void save(ReWiserMessage message);
+    void save(EmailEntity message);
 
-    Collection<ReWiserMessage> getAll();
+    Collection<EmailEntity> getAll();
 
     void clear();
 

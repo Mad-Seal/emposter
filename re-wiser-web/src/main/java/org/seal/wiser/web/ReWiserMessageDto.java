@@ -17,8 +17,10 @@ public class ReWiserMessageDto {
     private final long id;
     private final String from;
     private final String to;
+    private final String cc;
+    private final String bcc;
     private final String subject;
     private final String message;
-    private final OffsetDateTime date;
-    private Collection<Attachment> attachments = Collections.emptyList();
+    private final OffsetDateTime receivedDateTime;
+    private Collection<AttachmentDto> attachments = Collections.emptyList();
 }

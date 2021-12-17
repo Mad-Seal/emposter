@@ -8,25 +8,25 @@ import java.util.function.Consumer;
 public class MessageUpdateTrackingBackend implements MessageBackend {
 
     private MessageBackend delegate;
-    private Consumer<ReWiserMessage> onMessageCallback;
+    private Consumer<EmailEntity> onMessageCallback;
 
-    public MessageUpdateTrackingBackend(MessageBackend delegate, Consumer<ReWiserMessage> onMessageCallback) {
+    public MessageUpdateTrackingBackend(MessageBackend delegate, Consumer<EmailEntity> onMessageCallback) {
         this.delegate = delegate;
         this.onMessageCallback = onMessageCallback;
     }
 
     @Override
-    public void save(ReWiserMessage message) {
+    public void save(EmailEntity message) {
         delegate.save(message);
         onMessage(message);
     }
 
-    private void onMessage(ReWiserMessage message) {
+    private void onMessage(EmailEntity message) {
         onMessageCallback.accept(message);
     }
 
     @Override
-    public Collection<ReWiserMessage> getAll() {
+    public Collection<EmailEntity> getAll() {
         return delegate.getAll();
     }
 

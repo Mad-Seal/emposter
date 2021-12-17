@@ -12,10 +12,10 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import {Rows} from "./Rows";
+import {Email} from "./Email";
 
 
-function Row(props: { row: Rows }) {
+function Row(props: { row: Email }) {
     const {row} = props;
     const [open, setOpen] = React.useState(false);
 
@@ -35,7 +35,7 @@ function Row(props: { row: Rows }) {
                 <TableCell align="right">{row.from}</TableCell>
                 <TableCell align="right">{row.to}</TableCell>
                 <TableCell align="right">{row.subject}</TableCell>
-                <TableCell align="right">{row.date}</TableCell>
+                <TableCell align="right">{row.receivedDateTime}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
@@ -70,7 +70,7 @@ function Row(props: { row: Rows }) {
 }
 
 
-export default function CollapsibleTable(props: { rows: Array<Rows> }) {
+export default function CollapsibleTable(props: { rows: Array<Email> }) {
     return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">

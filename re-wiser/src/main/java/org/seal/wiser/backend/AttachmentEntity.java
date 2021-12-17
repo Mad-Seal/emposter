@@ -1,13 +1,12 @@
-package org.seal.wiser.web;
+package org.seal.wiser.backend;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-public class Attachment {
+public class AttachmentEntity {
     private long id;
     private String name;
+    private byte[] data;
 }
