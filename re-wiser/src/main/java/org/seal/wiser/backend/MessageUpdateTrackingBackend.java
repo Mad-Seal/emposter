@@ -1,32 +1,30 @@
 package org.seal.wiser.backend;
 
-import org.seal.wiser.re.ReWiserMessage;
-
 import java.util.Collection;
 import java.util.function.Consumer;
 
 public class MessageUpdateTrackingBackend implements MessageBackend {
 
     private MessageBackend delegate;
-    private Consumer<EmailEntity> onMessageCallback;
+    private Consumer<Email> onMessageCallback;
 
-    public MessageUpdateTrackingBackend(MessageBackend delegate, Consumer<EmailEntity> onMessageCallback) {
+    public MessageUpdateTrackingBackend(MessageBackend delegate, Consumer<Email> onMessageCallback) {
         this.delegate = delegate;
         this.onMessageCallback = onMessageCallback;
     }
 
     @Override
-    public void save(EmailEntity message) {
+    public void save(Email message) {
         delegate.save(message);
         onMessage(message);
     }
 
-    private void onMessage(EmailEntity message) {
+    private void onMessage(Email message) {
         onMessageCallback.accept(message);
     }
 
     @Override
-    public Collection<EmailEntity> getAll() {
+    public Collection<Email> getAll() {
         return delegate.getAll();
     }
 

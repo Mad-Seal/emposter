@@ -1,14 +1,14 @@
 package org.seal.wiser.web;
 
-import org.seal.wiser.backend.EmailEntity;
+import org.seal.wiser.backend.Email;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
+import java.util.stream.Collectors;
 
 @Component
 public class ReWiserMessageMapper {
 
-    public ReWiserMessageDto toDto(EmailEntity reWiserMessage) {
+    public ReWiserMessageDto toDto(Email reWiserMessage) {
         return new ReWiserMessageDto(
                 reWiserMessage.getId(),
                 reWiserMessage.getFrom(),
@@ -18,6 +18,9 @@ public class ReWiserMessageMapper {
                 reWiserMessage.getSubject(),
                 reWiserMessage.getMessage(),
                 reWiserMessage.getReceivedDateTime(),
-                Collections.singletonList(new AttachmentDto(-0, "important file")));
+                reWiserMessage.getAttachments().stream()
+                        .map(attachment -> new AttachmentDto(attachment.getId(), attachment.getName()))
+                        .collect(Collectors.toList())
+        );
     }
 }

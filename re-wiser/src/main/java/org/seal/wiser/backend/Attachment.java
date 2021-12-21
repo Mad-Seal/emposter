@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AttachmentEntity {
+public class Attachment {
     private long id;
     private String name;
     private byte[] data;

@@ -20,6 +20,10 @@
             <groupId>org.seal</groupId>
             <artifactId>re-wiser-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.seal</groupId>
+            <artifactId>re-wiser-jpa</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

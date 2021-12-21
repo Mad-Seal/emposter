@@ -1,14 +1,12 @@
 package org.seal.wiser.backend;
 
-import org.seal.wiser.re.ReWiserMessage;
-
 import java.util.Collection;
 
 public interface MessageBackend {
 
-    void save(EmailEntity message);
+    void save(Email message);
 
-    Collection<EmailEntity> getAll();
+    Collection<Email> getAll();
 
     void clear();
 

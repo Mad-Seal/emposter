@@ -2,15 +2,13 @@ package org.seal.wiser.re;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.seal.wiser.backend.EmailEntity;
+import org.seal.wiser.backend.Email;
 import org.seal.wiser.backend.MessageBackend;
 import org.subethamail.smtp.MessageContext;
 import org.subethamail.smtp.helper.BasicMessageListener;
 import org.subethamail.smtp.server.SMTPServer;
 
-import javax.mail.Session;
 import java.util.Collection;
-import java.util.Properties;
 
 @Slf4j
 public class ReWiser implements BasicMessageListener {
@@ -40,10 +38,15 @@ public class ReWiser implements BasicMessageListener {
     @Override
     public void messageArrived(MessageContext context, String from, String to, byte[] data) {
         log.debug("Creating message from data with {} bytes", data.length);
-        messageBackend.save(converter.convert(data, to));
+        try {
+            messageBackend.save(converter.convert(data, to));
+        } catch (Exception e) {
+            log.error(" :( ", e);
+            throw new RuntimeException(e);
+        }
     }
 
-    public Collection<EmailEntity> getMessages() {
+    public Collection<Email> getMessages() {
         return messageBackend.getAll();
     }
 

@@ -1,26 +1,28 @@
-package org.seal.wiser.backend;
+package org.seal.wiser.jpa.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.Collections;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
 public class EmailEntity {
-    private long id;
-    private String from;
+    @Id
+    @SequenceGenerator(name = "email-sequence-generator", sequenceName = "email_sequence")
+    @GeneratedValue(generator = "email-sequence-generator", strategy = GenerationType.SEQUENCE)
+    private Long id;
+    private String sender;
     private String to;
     private String cc;
     private String bcc;
     private String subject;
     private String message;
     private OffsetDateTime receivedDateTime;
+    @OneToMany(cascade = CascadeType.ALL)
     private Collection<AttachmentEntity> attachments = Collections.emptyList();
 }

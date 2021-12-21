@@ -34,6 +34,8 @@ function Row(props: { row: Email }) {
                 <TableCell align="right">{row.id}</TableCell>
                 <TableCell align="right">{row.from}</TableCell>
                 <TableCell align="right">{row.to}</TableCell>
+                <TableCell align="right">{row.cc}</TableCell>
+                <TableCell align="right">{row.bcc}</TableCell>
                 <TableCell align="right">{row.subject}</TableCell>
                 <TableCell align="right">{row.receivedDateTime}</TableCell>
             </TableRow>
@@ -76,12 +78,14 @@ export default function CollapsibleTable(props: { rows: Array<Email> }) {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell style={{width: "5%"}}/>
-                        <TableCell style={{width: "10%"}} align="right">Id</TableCell>
-                        <TableCell style={{width: "15%"}} align="right">From</TableCell>
-                        <TableCell style={{width: "20%"}} align="right">To</TableCell>
-                        <TableCell style={{width: "40%"}} align="right">Subject</TableCell>
-                        <TableCell style={{width: "10%"}} align="right">Date</TableCell>
+                        <TableCell/>
+                        <TableCell align="right">Id</TableCell>
+                        <TableCell align="right">From</TableCell>
+                        <TableCell align="right">To</TableCell>
+                        <TableCell align="right">Cc</TableCell>
+                        <TableCell align="right">Bcc</TableCell>
+                        <TableCell align="right">Subject</TableCell>
+                        <TableCell align="right">Date</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

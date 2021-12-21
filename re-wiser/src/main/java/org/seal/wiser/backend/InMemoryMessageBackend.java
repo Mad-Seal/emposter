@@ -8,16 +8,16 @@ import java.util.concurrent.atomic.AtomicLong;
 public class InMemoryMessageBackend implements MessageBackend {
 
     private AtomicLong sequence = new AtomicLong(0);
-    private Collection<EmailEntity> messages = new CopyOnWriteArrayList<>();
+    private Collection<Email> messages = new CopyOnWriteArrayList<>();
 
     @Override
-    public void save(EmailEntity message) {
+    public void save(Email message) {
         message.setId(sequence.getAndIncrement());
         messages.add(message);
     }
 
     @Override
-    public Collection<EmailEntity> getAll() {
+    public Collection<Email> getAll() {
         return messages;
     }
 
