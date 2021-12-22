@@ -18,7 +18,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
@@ -47,13 +46,11 @@ public class WiserPersistenceConfiguration {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean wiserEntityManagerFactory(
-            EntityManagerFactoryBuilder builder) {
-        Map<String, Object> properties = new HashMap<>();
-        properties.put("jpa.generate-ddl", true);
-        properties.put("jpa.hibernate.ddl-auto", "update");
+            EntityManagerFactoryBuilder builder,
+            VendorProperties vendorProperties) {
         return builder
                 .dataSource(wiserDataSource())
-                .properties(properties)
+                .properties(vendorProperties.getProperties())
                 .packages(EmailEntity.class)
                 .build();
     }
@@ -67,6 +64,24 @@ public class WiserPersistenceConfiguration {
     @Bean
     public MessageBackend persistentBackend(WiserRepository wiserRepository, AttachmentRepository attachmentRepository) {
         return new JpaMessageBackend(wiserRepository, attachmentRepository);
+    }
+
+    @Bean
+    @ConfigurationProperties("wiser.orm.vendor")
+    public VendorProperties vendorProperties() {
+        return new VendorProperties();
+    }
+
+    public static class VendorProperties {
+        private Map<String, String> properties;
+
+        public Map<String, String> getProperties() {
+            return properties;
+        }
+
+        public void setProperties(Map<String, String> properties) {
+            this.properties = properties;
+        }
     }
 
 }
