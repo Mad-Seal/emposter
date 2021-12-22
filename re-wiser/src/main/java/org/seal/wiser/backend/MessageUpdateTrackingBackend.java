@@ -32,4 +32,14 @@ public class MessageUpdateTrackingBackend implements MessageBackend {
     public void clear() {
         delegate.clear();
     }
+
+    @Override
+    public Attachment getAttachment(long id) {
+        return delegate.getAttachment(id);
+    }
+
+    @Override
+    public boolean canClear() {
+        return delegate.canClear();
+    }
 }

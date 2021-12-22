@@ -10,13 +10,11 @@ const GetMessages = () => {
 }
 
 const GetCanPurge = () => {
-    return new Promise<boolean>((resolve, reject) => {
-        resolve(true)
-    })
+    return request.get<boolean>('purgable')
 }
 
 const Purge = () => {
-
+    return request.delete('')
 }
 
 export {GetMessages, GetCanPurge, Purge};

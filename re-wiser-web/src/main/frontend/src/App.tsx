@@ -4,16 +4,17 @@ import CollapsibleTable from "./CollapsibleTable";
 import {GetCanPurge, GetMessages, Purge} from "./Services";
 import {Button} from "@mui/material";
 import {Email} from "./Email";
+import Alert from "@mui/material/Alert";
 
 function App() {
 
     const [emails, setEmails] = useState<Email[]>([]);
-    const [canPurge, setCanPurge] = useState(false);
+    const [canPurge, setCanPurge] = useState<boolean>(false);
 
     useEffect(() => {
         GetCanPurge()
-            .then(canPurge => {
-                setCanPurge(canPurge)
+            .then(({data}) => {
+                setCanPurge(data)
             })
     })
 
@@ -24,10 +25,12 @@ function App() {
             })
     }
 
+    let alert = "Backend which you are using does not (fully or partially) support purging.";
     return (
         <div className="App">
+            {!canPurge && <Alert severity="warning">{alert}</Alert>}
             <Button onClick={() => onClick()}>Refresh</Button>
-            <Button disabled={!canPurge} onClick={() => Purge()}>Purge</Button>
+            <Button onClick={() => Purge()}>Purge</Button>
             <div style={{height: 400, width: '90%', margin: '5%'}}>
                 <CollapsibleTable rows={emails}/>
             </div>

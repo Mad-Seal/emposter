@@ -53,6 +53,10 @@ public class ReWiser implements BasicMessageListener {
     public void clear() {
         messageBackend.clear();
     }
+
+    public boolean canClear() {
+        return messageBackend.canClear();
+    }
 }
 
 

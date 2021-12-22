@@ -47,9 +47,9 @@ public class TestController {
         helper.setText("text", true);
         helper.setCc("cc1@seal.org");
         helper.setBcc("bcc1@seal.org");
-        helper.addAttachment("important-attachment", file);
+        helper.addAttachment("attachment one.jpg", file);
+        helper.addAttachment("attachment two.jpg", file);
         client.send(message);
-
     }
 
 }

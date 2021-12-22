@@ -5,6 +5,7 @@ import org.seal.wiser.backend.Email;
 import org.seal.wiser.backend.MessageBackend;
 import org.seal.wiser.jpa.entity.AttachmentEntity;
 import org.seal.wiser.jpa.entity.EmailEntity;
+import org.seal.wiser.jpa.repository.AttachmentRepository;
 import org.seal.wiser.jpa.repository.WiserRepository;
 
 import java.util.Collection;
@@ -13,9 +14,11 @@ import java.util.stream.Collectors;
 public class JpaMessageBackend implements MessageBackend {
 
     private WiserRepository wiserRepository;
+    private AttachmentRepository attachmentRepository;
 
-    public JpaMessageBackend(WiserRepository wiserRepository) {
+    public JpaMessageBackend(WiserRepository wiserRepository, AttachmentRepository attachmentRepository) {
         this.wiserRepository = wiserRepository;
+        this.attachmentRepository = attachmentRepository;
     }
 
     @Override
@@ -72,5 +75,22 @@ public class JpaMessageBackend implements MessageBackend {
     @Override
     public void clear() {
         wiserRepository.deleteAll();
+    }
+
+    @Override
+    public Attachment getAttachment(long id) {
+        return attachmentRepository.findById(id)
+                .map(attachmentEntity -> {
+                    Attachment attachment = new Attachment();
+                    attachment.setData(attachmentEntity.getData());
+                    attachment.setName(attachmentEntity.getName());
+                    return attachment;
+                })
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
+    @Override
+    public boolean canClear() {
+        return true;
     }
 }

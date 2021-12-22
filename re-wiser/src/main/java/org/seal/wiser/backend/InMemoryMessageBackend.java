@@ -13,6 +13,7 @@ public class InMemoryMessageBackend implements MessageBackend {
     @Override
     public void save(Email message) {
         message.setId(sequence.getAndIncrement());
+        message.getAttachments().forEach(attachment -> attachment.setId(sequence.getAndIncrement()));
         messages.add(message);
     }
 
@@ -24,5 +25,20 @@ public class InMemoryMessageBackend implements MessageBackend {
     @Override
     public void clear() {
         messages.clear();
+    }
+
+    @Override
+    public Attachment getAttachment(long id) {
+        return messages.stream()
+                .map(Email::getAttachments)
+                .flatMap(Collection::stream)
+                .filter(attachment -> attachment.getId() == id)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
+    @Override
+    public boolean canClear() {
+        return false;
     }
 }

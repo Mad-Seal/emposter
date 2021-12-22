@@ -3,6 +3,7 @@ package org.seal.wiser.jpa;
 import org.seal.wiser.backend.MessageBackend;
 import org.seal.wiser.jpa.backend.JpaMessageBackend;
 import org.seal.wiser.jpa.entity.EmailEntity;
+import org.seal.wiser.jpa.repository.AttachmentRepository;
 import org.seal.wiser.jpa.repository.WiserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -64,8 +65,8 @@ public class WiserPersistenceConfiguration {
     }
 
     @Bean
-    public MessageBackend persistentBackend(WiserRepository wiserRepository) {
-        return new JpaMessageBackend(wiserRepository);
+    public MessageBackend persistentBackend(WiserRepository wiserRepository, AttachmentRepository attachmentRepository) {
+        return new JpaMessageBackend(wiserRepository, attachmentRepository);
     }
 
 }

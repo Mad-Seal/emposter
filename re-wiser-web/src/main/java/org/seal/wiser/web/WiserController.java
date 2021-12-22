@@ -33,4 +33,9 @@ public class WiserController {
         reWiser.clear();
     }
 
+    @GetMapping("messages/purgable")
+    public boolean canPurge(){
+        return reWiser.canClear();
+    }
+
 }

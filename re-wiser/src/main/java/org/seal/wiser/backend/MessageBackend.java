@@ -10,4 +10,7 @@ public interface MessageBackend {
 
     void clear();
 
+    Attachment getAttachment(long id);
+
+    boolean canClear();
 }

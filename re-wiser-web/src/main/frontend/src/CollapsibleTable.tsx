@@ -13,6 +13,7 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {Email} from "./Email";
+import {Link} from "@mui/material";
 
 
 function Row(props: { row: Email }) {
@@ -57,7 +58,7 @@ function Row(props: { row: Email }) {
                                     {row.attachments.map((attachment) => (
                                         <TableRow key={attachment.id}>
                                             <TableCell component="th" scope="row">
-                                                {attachment.name}
+                                                <Link href={"attachment/" + attachment.id}>{attachment.name}</Link>
                                             </TableCell>
                                         </TableRow>
                                     ))}
