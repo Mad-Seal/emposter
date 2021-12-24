@@ -44,7 +44,7 @@ public class TestController {
         helper.setFrom("from@seal.org");
         helper.setTo(new String[]{"to1@seal.org", "to2@seal.org"});
         helper.setSubject("subj");
-        helper.setText("text", true);
+        helper.setText("<div>text</div>", true);
         helper.setCc("cc1@seal.org");
         helper.setBcc("bcc1@seal.org");
         helper.addAttachment("attachment one.jpg", file);
