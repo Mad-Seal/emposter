@@ -20,7 +20,7 @@ public class EmailDto {
     private final String cc;
     private final String bcc;
     private final String subject;
-    private final String message;
+    private final String text;
     private final OffsetDateTime receivedDateTime;
     private Collection<AttachmentDto> attachments = Collections.emptyList();
 }

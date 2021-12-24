@@ -48,7 +48,7 @@ function Row(props: { email: Email }) {
                                 Email text
                             </Typography>
                             <Typography variant="body2" gutterBottom component="div">
-                                {email.message}
+                                {email.text}
                             </Typography>
                             <Typography variant="h6" gutterBottom component="div">
                                 Attachments
