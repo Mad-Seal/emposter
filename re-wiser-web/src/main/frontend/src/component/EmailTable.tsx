@@ -48,7 +48,6 @@ function Row(props: { email: Email }) {
                                 Email text
                             </Typography>
                             <Typography variant="body2" gutterBottom component="div">
-                                {/*TODO: check of potential XSS when message contain html and js*/}
                                 {email.message}
                             </Typography>
                             <Typography variant="h6" gutterBottom component="div">
