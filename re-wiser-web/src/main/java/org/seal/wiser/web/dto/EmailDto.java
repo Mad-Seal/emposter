@@ -1,4 +1,4 @@
-package org.seal.wiser.web;
+package org.seal.wiser.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import java.util.Collections;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class ReWiserMessageDto {
+public class EmailDto {
     private final long id;
     private final String from;
     private final String to;

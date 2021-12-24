@@ -15,7 +15,7 @@ public class ReWiser implements BasicMessageListener {
 
     private SMTPServer server;
     private MessageBackend messageBackend;
-    private Converter converter;
+    private EmailConverter emailConverter;
 
     public static ReWiser create(SMTPServer.Builder builder, MessageBackend messageBackend) {
         return new ReWiser(builder, messageBackend);
@@ -24,7 +24,7 @@ public class ReWiser implements BasicMessageListener {
     private ReWiser(SMTPServer.Builder builder, MessageBackend messageBackend) {
         this.server = builder.messageHandlerFactory(new ConsolidatedMessageHandlerFactory(this)).build();
         this.messageBackend = messageBackend;
-        converter = new Converter();
+        emailConverter = new EmailConverter();
     }
 
     public void start() {
@@ -37,11 +37,25 @@ public class ReWiser implements BasicMessageListener {
 
     @Override
     public void messageArrived(MessageContext context, String from, String to, byte[] data) {
-        log.debug("Creating message from data with {} bytes", data.length);
+        log.debug("Message with {} bytes arrived", data.length);
+        save(convert(to, data));
+    }
+
+    private void save(Email email) {
         try {
-            messageBackend.save(converter.convert(data, to));
+            messageBackend.save(email);
+            log.debug("Email saved");
         } catch (Exception e) {
-            log.error(" :( ", e);
+            log.error("Failed to save", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Email convert(String to, byte[] data) {
+        try {
+            return emailConverter.convert(data, to);
+        } catch (Exception e) {
+            log.error("Failed to convert raw mime message into email");
             throw new RuntimeException(e);
         }
     }

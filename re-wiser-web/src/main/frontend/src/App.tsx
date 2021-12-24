@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import CollapsibleTable from "./CollapsibleTable";
-import {GetCanPurge, GetMessages, Purge} from "./Services";
+import EmailTable from "./component/EmailTable";
+import {GetCanPurge, GetMessages, Purge} from "./service/ApiService";
 import {Button} from "@mui/material";
-import {Email} from "./Email";
+import {Email} from "./model/Email";
 import Alert from "@mui/material/Alert";
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
             <Button onClick={() => onClick()}>Refresh</Button>
             <Button onClick={() => Purge()}>Purge</Button>
             <div style={{height: 400, width: '90%', margin: '5%'}}>
-                <CollapsibleTable rows={emails}/>
+                <EmailTable emails={emails}/>
             </div>
         </div>
     );

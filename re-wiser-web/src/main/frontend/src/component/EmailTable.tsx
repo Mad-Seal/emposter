@@ -12,13 +12,13 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import {Email} from "./Email";
+import {Email} from "../model/Email";
 import {Link} from "@mui/material";
 
 
-function Row(props: { row: Email }) {
-    const {row} = props;
-    const [open, setOpen] = React.useState(false);
+function Row(props: { email: Email }) {
+    const {email} = props;
+    const [expanded, setExpanded] = React.useState(false);
 
     return (
         <React.Fragment>
@@ -27,37 +27,39 @@ function Row(props: { row: Email }) {
                     <IconButton
                         aria-label="expand row"
                         size="small"
-                        onClick={() => setOpen(!open)}
+                        onClick={() => setExpanded(!expanded)}
                     >
-                        {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+                        {expanded ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
                     </IconButton>
                 </TableCell>
-                <TableCell align="right">{row.id}</TableCell>
-                <TableCell align="right">{row.from}</TableCell>
-                <TableCell align="right">{row.to}</TableCell>
-                <TableCell align="right">{row.cc}</TableCell>
-                <TableCell align="right">{row.bcc}</TableCell>
-                <TableCell align="right">{row.subject}</TableCell>
-                <TableCell align="right">{row.receivedDateTime}</TableCell>
+                <TableCell align="right">{email.id}</TableCell>
+                <TableCell align="right">{email.from}</TableCell>
+                <TableCell align="right">{email.to}</TableCell>
+                <TableCell align="right">{email.cc}</TableCell>
+                <TableCell align="right">{email.bcc}</TableCell>
+                <TableCell align="right">{email.subject}</TableCell>
+                <TableCell align="right">{email.receivedDateTime}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
+                    <Collapse in={expanded} timeout="auto" unmountOnExit>
                         <Box sx={{margin: 1}}>
                             <Typography variant="h6" gutterBottom component="div">
-                                Message
+                                Email text
                             </Typography>
                             <Typography variant="body2" gutterBottom component="div">
-                                {row.message}
+                                {/*TODO: check of potential XSS when message contain html and js*/}
+                                {email.message}
                             </Typography>
                             <Typography variant="h6" gutterBottom component="div">
                                 Attachments
                             </Typography>
                             <Table size="small" aria-label="purchases">
                                 <TableBody>
-                                    {row.attachments.map((attachment) => (
+                                    {email.attachments.map((attachment) => (
                                         <TableRow key={attachment.id}>
                                             <TableCell component="th" scope="row">
+                                                {/*TODO: check for potential XSS*/}
                                                 <Link href={"attachment/" + attachment.id}>{attachment.name}</Link>
                                             </TableCell>
                                         </TableRow>
@@ -73,10 +75,10 @@ function Row(props: { row: Email }) {
 }
 
 
-export default function CollapsibleTable(props: { rows: Array<Email> }) {
+export default function EmailTable(props: { emails: Email[] }) {
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
+            <Table aria-label="email table">
                 <TableHead>
                     <TableRow>
                         <TableCell/>
@@ -90,8 +92,8 @@ export default function CollapsibleTable(props: { rows: Array<Email> }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.rows.map((row) => (
-                        <Row key={row.id} row={row}/>
+                    {props.emails.map((email) => (
+                        <Row key={email.id} email={email}/>
                     ))}
                 </TableBody>
             </Table>

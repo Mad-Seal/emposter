@@ -1,4 +1,4 @@
-package org.seal.wiser.web;
+package org.seal.wiser.web.controller;
 
 import org.seal.wiser.backend.Attachment;
 import org.seal.wiser.backend.MessageBackend;
