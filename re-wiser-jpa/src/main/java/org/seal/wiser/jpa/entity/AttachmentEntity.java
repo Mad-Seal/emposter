@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 public class AttachmentEntity {
     @Id
-    @SequenceGenerator(name = "attachment-sequence-generator", sequenceName = "attachment_sequence")
+    @SequenceGenerator(name = "attachment-sequence-generator", sequenceName = "wiser_attachment_sequence")
     @GeneratedValue(generator = "attachment-sequence-generator", strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;

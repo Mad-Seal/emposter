@@ -20,6 +20,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Map;
 
+/**
+ * Separate DataSource configuration to not interfere into Datasource of carrier application
+ */
 @Configuration
 @EnableJpaRepositories(
         basePackages = "org.seal.wiser.jpa.repository",

@@ -13,7 +13,7 @@ import java.util.Collections;
 @Entity
 public class EmailEntity {
     @Id
-    @SequenceGenerator(name = "email-sequence-generator", sequenceName = "email_sequence")
+    @SequenceGenerator(name = "email-sequence-generator", sequenceName = "wiser_email_sequence")
     @GeneratedValue(generator = "email-sequence-generator", strategy = GenerationType.SEQUENCE)
     private Long id;
     private String sender;
