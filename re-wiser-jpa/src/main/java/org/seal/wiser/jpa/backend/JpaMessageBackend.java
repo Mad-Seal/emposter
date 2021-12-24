@@ -6,18 +6,18 @@ import org.seal.wiser.backend.MessageBackend;
 import org.seal.wiser.jpa.entity.AttachmentEntity;
 import org.seal.wiser.jpa.entity.EmailEntity;
 import org.seal.wiser.jpa.repository.AttachmentRepository;
-import org.seal.wiser.jpa.repository.WiserRepository;
+import org.seal.wiser.jpa.repository.EmailRepository;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class JpaMessageBackend implements MessageBackend {
 
-    private WiserRepository wiserRepository;
+    private EmailRepository emailRepository;
     private AttachmentRepository attachmentRepository;
 
-    public JpaMessageBackend(WiserRepository wiserRepository, AttachmentRepository attachmentRepository) {
-        this.wiserRepository = wiserRepository;
+    public JpaMessageBackend(EmailRepository emailRepository, AttachmentRepository attachmentRepository) {
+        this.emailRepository = emailRepository;
         this.attachmentRepository = attachmentRepository;
     }
 
@@ -29,7 +29,7 @@ public class JpaMessageBackend implements MessageBackend {
             entity.setTo(email.getTo());
             entity.setCc(email.getCc());
             entity.setBcc(email.getBcc());
-            entity.setMessage(email.getMessage());
+            entity.setMessage(email.getText());
             entity.setSubject(email.getSubject());
             entity.setReceivedDateTime(email.getReceivedDateTime());
             entity.setAttachments(email.getAttachments().stream()
@@ -39,7 +39,7 @@ public class JpaMessageBackend implements MessageBackend {
                         attachmentEntity.setName(attachment.getName());
                         return attachmentEntity;
                     }).collect(Collectors.toList()));
-            wiserRepository.save(entity);
+            emailRepository.save(entity);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,7 +47,7 @@ public class JpaMessageBackend implements MessageBackend {
 
     @Override
     public Collection<Email> getAll() {
-        return wiserRepository.findAll()
+        return emailRepository.findAll()
                 .stream().map(emailEntity -> {
                     Email email = new Email();
                     email.setId(emailEntity.getId());
@@ -55,7 +55,7 @@ public class JpaMessageBackend implements MessageBackend {
                     email.setTo(emailEntity.getTo());
                     email.setCc(emailEntity.getCc());
                     email.setBcc(emailEntity.getBcc());
-                    email.setMessage(emailEntity.getMessage());
+                    email.setText(emailEntity.getMessage());
                     email.setSubject(emailEntity.getSubject());
                     email.setReceivedDateTime(emailEntity.getReceivedDateTime());
                     email.setAttachments(emailEntity.getAttachments().stream()
@@ -63,7 +63,6 @@ public class JpaMessageBackend implements MessageBackend {
                                 Attachment attachment = new Attachment();
                                 attachment.setId(attachmentEntity.getId());
                                 attachment.setName(attachmentEntity.getName());
-                                attachment.setData(attachmentEntity.getData());
                                 return attachment;
                             })
                             .collect(Collectors.toList())
@@ -74,7 +73,7 @@ public class JpaMessageBackend implements MessageBackend {
 
     @Override
     public void clear() {
-        wiserRepository.deleteAll();
+        emailRepository.deleteAll();
     }
 
     @Override

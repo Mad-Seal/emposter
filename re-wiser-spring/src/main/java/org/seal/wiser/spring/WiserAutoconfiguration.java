@@ -12,13 +12,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConditionalOnMissingBean(WiserBean.class)
+@ConditionalOnMissingBean(WiserLifecycleHook.class)
 @ConditionalOnProperty(name = "spring.wiser.enabled", matchIfMissing = true)
 public class WiserAutoconfiguration {
 
     @Bean
-    public WiserBean wiserBean(ReWiser wiser) {
-        return new WiserBean(wiser);
+    public WiserLifecycleHook wiserBean(ReWiser wiser) {
+        return new WiserLifecycleHook(wiser);
     }
 
     @Bean
@@ -27,8 +27,8 @@ public class WiserAutoconfiguration {
     }
 
     @Bean
-    public SmtpServiceFactory smtpServiceFactory() {
-        return new SmtpServiceFactory();
+    public ReWiserFactory smtpServiceFactory() {
+        return new ReWiserFactory();
     }
 
     @Bean

@@ -3,13 +3,12 @@ package org.seal.wiser.spring;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.net.InetAddress;
-import java.util.Optional;
-
 @Getter
 @Setter
 public class WiserProperties {
     private int port = 25;
+    /*
+    Unsupported properties:
     private int timeout = 1000;
     private String authenticationHandlerBeanName;
     private int backlog = 100;
@@ -27,5 +26,6 @@ public class WiserProperties {
     private String sslSocketCreatorBeanName;
     private boolean requireClientCertificate;
     private boolean enableTls;
+    */
 
 }

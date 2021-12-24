@@ -17,12 +17,12 @@ import java.util.Collection;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-public class Converter {
+public class EmailConverter {
 
     @SneakyThrows
-    public Email convert(byte[] messageData, String to) {
+    public Email convert(byte[] rawMimeMessage, String to) {
         MimeMessage mimeMessage = new MimeMessage(
-                Session.getDefaultInstance(new Properties()), new ByteArrayInputStream(messageData));
+                Session.getDefaultInstance(new Properties()), new ByteArrayInputStream(rawMimeMessage));
         Email email = new Email();
         email.setFrom(addressesAsString(mimeMessage.getFrom()));
         email.setTo(addressesAsString(mimeMessage.getRecipients(Message.RecipientType.TO)));
@@ -34,14 +34,15 @@ public class Converter {
         return email;
     }
 
-    private void extractPart(Part mimeMessage, Email email) throws IOException, MessagingException {
-        Object content = mimeMessage.getContent();
+    @SneakyThrows
+    private void extractPart(Part mimeMessagePart, Email email) {
+        Object content = mimeMessagePart.getContent();
         if (content instanceof String) {
-            email.setMessage(content.toString());
+            email.setText(content.toString());
         } else if (content instanceof InputStream) {
             Attachment e = new Attachment();
             e.setData(readAllBytes((InputStream) content));
-            e.setName(mimeMessage.getFileName());
+            e.setName(mimeMessagePart.getFileName());
             email.getAttachments().add(e);
         } else if (content instanceof MimeMultipart) {
             MimeMultipart multipart = (MimeMultipart) content;
@@ -52,29 +53,28 @@ public class Converter {
         }
     }
 
-    public static byte[] readAllBytes(InputStream inputStream) throws IOException {
-        final int bufLen = 4 * 0x400; // 4KB
-        byte[] buf = new byte[bufLen];
-        int readLen;
-        IOException exception = null;
-
+    private byte[] readAllBytes(InputStream inputStream) {
+        int bufferLength = 4 * 0x400; // 4KB
+        byte[] buffer = new byte[bufferLength];
+        int readLength;
         try {
             try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
-                while ((readLen = inputStream.read(buf, 0, bufLen)) != -1)
-                    outputStream.write(buf, 0, readLen);
+                while ((readLength = inputStream.read(buffer, 0, bufferLength)) != -1)
+                    outputStream.write(buffer, 0, readLength);
 
                 return outputStream.toByteArray();
             }
         } catch (IOException e) {
-            exception = e;
-            throw e;
-        } finally {
-            if (exception == null) inputStream.close();
-            else try {
-                inputStream.close();
-            } catch (IOException e) {
-                exception.addSuppressed(e);
-            }
+            handleInputException(inputStream, e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void handleInputException(InputStream inputStream, IOException e) {
+        try {
+            inputStream.close();
+        } catch (IOException ise) {
+            e.addSuppressed(ise);
         }
     }
 

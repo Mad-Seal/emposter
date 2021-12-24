@@ -1,4 +1,4 @@
-package org.seal.wiser.web;
+package org.seal.wiser.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

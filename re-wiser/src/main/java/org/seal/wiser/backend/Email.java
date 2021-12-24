@@ -18,7 +18,7 @@ public class Email {
     private String cc;
     private String bcc;
     private String subject;
-    private String message;
+    private String text;
     private OffsetDateTime receivedDateTime;
     private Collection<Attachment> attachments = new LinkedList<>();
 }

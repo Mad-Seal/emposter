@@ -1,6 +1,8 @@
-package org.seal.wiser.web;
+package org.seal.wiser.web.controller;
 
 import org.seal.wiser.re.ReWiser;
+import org.seal.wiser.web.dto.EmailDto;
+import org.seal.wiser.web.EmailDtoMapper;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,17 +16,17 @@ import java.util.stream.Collectors;
 public class WiserController {
 
     private ReWiser reWiser;
-    private ReWiserMessageMapper reWiserMessageMapper;
+    private EmailDtoMapper emailDtoMapper;
 
-    public WiserController(ReWiser reWiser, ReWiserMessageMapper reWiserMessageMapper) {
+    public WiserController(ReWiser reWiser, EmailDtoMapper emailDtoMapper) {
         this.reWiser = reWiser;
-        this.reWiserMessageMapper = reWiserMessageMapper;
+        this.emailDtoMapper = emailDtoMapper;
     }
 
     @GetMapping("messages")
-    public Collection<ReWiserMessageDto> getMessages() {
+    public Collection<EmailDto> getMessages() {
         return reWiser.getMessages().stream()
-                .map(reWiserMessageMapper::toDto)
+                .map(emailDtoMapper::toDto)
                 .collect(Collectors.toList());
     }
 

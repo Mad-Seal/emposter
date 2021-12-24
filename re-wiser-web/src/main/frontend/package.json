@@ -15,7 +15,8 @@
     "react-scripts": "4.0.3"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "dev": "webpack --config webpack.dev.config.js",
+    "build": "webpack --config webpack.prod.config.js"
   },
   "eslintConfig": {
     "extends": [
