@@ -59,7 +59,6 @@ function Row(props: { email: Email }) {
                                     {email.attachments.map((attachment) => (
                                         <TableRow key={attachment.id}>
                                             <TableCell component="th" scope="row">
-                                                {/*TODO: check for potential XSS*/}
                                                 <Link href={"attachment/" + attachment.id}>{attachment.name}</Link>
                                             </TableCell>
                                         </TableRow>
