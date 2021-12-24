@@ -17,6 +17,10 @@ import java.util.Collection;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
+/**
+ * Converter to transform raw mime message (from SMTP DATA fragment)
+ * and comma separated list of recipients (from SMTP TO header) into {@link Email} for further internal usage.
+ */
 public class EmailConverter {
 
     @SneakyThrows
@@ -29,26 +33,43 @@ public class EmailConverter {
         email.setCc(addressesAsString(mimeMessage.getRecipients(Message.RecipientType.CC)));
         email.setBcc(getBccs(to, mimeMessage));
         email.setSubject(mimeMessage.getSubject());
-        extractPart(mimeMessage, email);
+        extractParts(mimeMessage, email);
         email.setReceivedDateTime(OffsetDateTime.now());
         return email;
     }
 
+    /**
+     * mimeMessage won't have BCC because this information not present in messageData.
+     * BCC are only populated in SMTP TO header and not part of SMTP DATA. Looking up BBCs.
+     */
     @SneakyThrows
-    private void extractPart(Part mimeMessagePart, Email email) {
+    private String getBccs(String to, MimeMessage mimeMessage) {
+        Collection<String> allAddresses = Arrays.stream(mimeMessage.getAllRecipients())
+                .map(Address::toString)
+                .collect(Collectors.toSet());
+        return Arrays.stream(to.split(","))
+                .filter(recipient -> !allAddresses.contains(recipient))
+                .collect(Collectors.joining());
+    }
+
+    /**
+     * Traverses mime message parts and extracts email text and attachments, if any.
+     */
+    @SneakyThrows
+    private void extractParts(Part mimeMessagePart, Email email) {
         Object content = mimeMessagePart.getContent();
         if (content instanceof String) {
             email.setText(content.toString());
         } else if (content instanceof InputStream) {
-            Attachment e = new Attachment();
-            e.setData(readAllBytes((InputStream) content));
-            e.setName(mimeMessagePart.getFileName());
-            email.getAttachments().add(e);
+            Attachment attachment = new Attachment();
+            attachment.setData(readAllBytes((InputStream) content));
+            attachment.setName(mimeMessagePart.getFileName());
+            email.getAttachments().add(attachment);
         } else if (content instanceof MimeMultipart) {
             MimeMultipart multipart = (MimeMultipart) content;
             for (int i = 0; i < multipart.getCount(); i++) {
                 BodyPart bodyPart = multipart.getBodyPart(i);
-                extractPart(bodyPart, email);
+                extractParts(bodyPart, email);
             }
         }
     }
@@ -80,20 +101,6 @@ public class EmailConverter {
 
     private String addressesAsString(Address... addresses) {
         return Arrays.stream(addresses).map(Address::toString).collect(Collectors.joining(","));
-    }
-
-    /**
-     * mimeMessage won't have BCC because this information not present in messageData.
-     * BCC are only populated in SMTP TO header and not part of SMTP DATA. Looking up BBCs.
-     */
-    @SneakyThrows
-    private String getBccs(String to, MimeMessage mimeMessage) {
-        Collection<String> allAddresses = Arrays.stream(mimeMessage.getAllRecipients())
-                .map(Address::toString)
-                .collect(Collectors.toSet());
-        return Arrays.stream(to.split(","))
-                .filter(recipient -> !allAddresses.contains(recipient))
-                .collect(Collectors.joining());
     }
 
 

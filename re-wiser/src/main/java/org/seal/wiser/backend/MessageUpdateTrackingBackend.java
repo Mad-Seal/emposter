@@ -3,6 +3,10 @@ package org.seal.wiser.backend;
 import java.util.Collection;
 import java.util.function.Consumer;
 
+/**
+ * Decorator for MessageBackend.
+ * Triggers provided callback after saving message.
+ */
 public class MessageUpdateTrackingBackend implements MessageBackend {
 
     private MessageBackend delegate;

@@ -10,6 +10,9 @@ import org.subethamail.smtp.server.SMTPServer;
 
 import java.util.Collection;
 
+/**
+ * Main class responsible for starting SMTP server, listening for incoming emails and handling them accordingly
+ */
 @Slf4j
 public class ReWiser implements BasicMessageListener {
 
