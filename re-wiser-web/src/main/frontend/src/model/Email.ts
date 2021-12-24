@@ -7,7 +7,7 @@ class Email {
     cc: string;
     bcc: string;
     subject: string;
-    message: string;
+    text: string;
     receivedDateTime: string;
     attachments: Array<Attachment>;
 
@@ -17,7 +17,7 @@ class Email {
                 cc: string,
                 bcc: string,
                 subject: string,
-                message: string,
+                text: string,
                 receivedDateTime: string,
                 attachments: Array<Attachment>) {
         this.id = id;
@@ -26,7 +26,7 @@ class Email {
         this.cc = cc;
         this.bcc = bcc;
         this.subject = subject;
-        this.message = message;
+        this.text = text;
         this.receivedDateTime = receivedDateTime;
         this.attachments = attachments;
     }

@@ -29,7 +29,7 @@ public class JpaMessageBackend implements MessageBackend {
             entity.setTo(email.getTo());
             entity.setCc(email.getCc());
             entity.setBcc(email.getBcc());
-            entity.setMessage(email.getText());
+            entity.setText(email.getText());
             entity.setSubject(email.getSubject());
             entity.setReceivedDateTime(email.getReceivedDateTime());
             entity.setAttachments(email.getAttachments().stream()
@@ -55,7 +55,7 @@ public class JpaMessageBackend implements MessageBackend {
                     email.setTo(emailEntity.getTo());
                     email.setCc(emailEntity.getCc());
                     email.setBcc(emailEntity.getBcc());
-                    email.setText(emailEntity.getMessage());
+                    email.setText(emailEntity.getText());
                     email.setSubject(emailEntity.getSubject());
                     email.setReceivedDateTime(emailEntity.getReceivedDateTime());
                     email.setAttachments(emailEntity.getAttachments().stream()
