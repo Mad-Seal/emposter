@@ -1,7 +1,6 @@
 const path = require('path');
 
 module.exports = {
-    //TODO: create prod config... eventually
     mode: 'development',
     entry: './src/index.tsx',
     output: {
