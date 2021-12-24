@@ -8,6 +8,7 @@ import lombok.Setter;
 public class WiserProperties {
     private int port = 25;
     /*
+    Only useful properties for now.
     Unsupported properties:
     private int timeout = 1000;
     private String authenticationHandlerBeanName;

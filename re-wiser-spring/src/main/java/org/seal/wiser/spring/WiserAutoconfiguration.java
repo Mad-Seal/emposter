@@ -40,8 +40,9 @@ public class WiserAutoconfiguration {
     @Bean
     @ConditionalOnMissingBean
     public MessageBackend messageBackend() {
-        return new MessageUpdateTrackingBackend(new InMemoryMessageBackend(), (message) -> {
-            LoggerFactory.getLogger(WiserAutoconfiguration.class).info(message.toString());
-        });
+        return new MessageUpdateTrackingBackend(
+                new InMemoryMessageBackend(),
+                (message) -> LoggerFactory.getLogger(WiserAutoconfiguration.class).info(message.toString())
+        );
     }
 }
