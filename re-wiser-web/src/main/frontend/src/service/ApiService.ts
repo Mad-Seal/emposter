@@ -1,8 +1,7 @@
 import axios from "axios";
 import {Email} from "../model/Email";
 
-//TODO: check relative url or figure out metadata passing
-const baseUrl = 'http://localhost:8080/wiser/messages'
+const baseUrl = '/wiser/messages'
 
 const request = axios.create({baseURL: baseUrl});
 
