@@ -6,6 +6,10 @@ import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.LinkedList;
 
+/**
+ * Represents email.
+ * Transferred between components of system.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

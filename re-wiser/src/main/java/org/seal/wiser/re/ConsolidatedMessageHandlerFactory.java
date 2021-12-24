@@ -7,6 +7,11 @@ import org.subethamail.smtp.RejectException;
 import org.subethamail.smtp.helper.BasicMessageHandlerFactory;
 import org.subethamail.smtp.helper.BasicMessageListener;
 
+/**
+ * By design subethasmtp handles each recipient in email separately.
+ * This is not desired behaviour as it will lead to multiple email copies stored for each email.
+ * Thus, aggregating recipients into one comma separated list to handle them all in one go.
+ */
 public class ConsolidatedMessageHandlerFactory implements MessageHandlerFactory {
 
     private BasicMessageListener listener;
