@@ -16,21 +16,31 @@ function App() {
             .then(({data}) => {
                 setCanPurge(data)
             })
-    })
+    }, [])
 
-    const onClick = () => {
+    useEffect(() => {
+        onRefresh();
+    }, [])
+
+    const onRefresh = () => {
         GetMessages()
             .then(({data}) => {
                 setEmails(data);
             })
     }
 
+    let onPurge = async () => {
+        let purgeResponse = await Purge();
+        setEmails([]);
+        return purgeResponse;
+    };
+
     let alert = "Backend which you are using does not (fully or partially) support purging.";
     return (
         <div className="App">
             {!canPurge && <Alert severity="warning">{alert}</Alert>}
-            <Button onClick={() => onClick()}>Refresh</Button>
-            <Button onClick={() => Purge()}>Purge</Button>
+            <Button onClick={onRefresh}>Refresh</Button>
+            <Button onClick={onPurge}>Purge</Button>
             <div style={{height: 400, width: '90%', margin: '5%'}}>
                 <EmailTable emails={emails}/>
             </div>
