@@ -15,7 +15,6 @@
         <dependency>
             <groupId>com.github.davidmoten</groupId>
             <artifactId>subethasmtp</artifactId>
-            <version>5.2.8</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

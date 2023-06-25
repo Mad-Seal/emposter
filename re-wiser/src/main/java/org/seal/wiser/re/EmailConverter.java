@@ -1,12 +1,12 @@
 package org.seal.wiser.re;
 
+import jakarta.mail.*;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
 import lombok.SneakyThrows;
 import org.seal.wiser.backend.Attachment;
 import org.seal.wiser.backend.Email;
 
-import javax.mail.*;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

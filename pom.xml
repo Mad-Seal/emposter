@@ -16,7 +16,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.1</version>
+        <version>3.1.1</version>
         <relativePath/>
     </parent>
 
@@ -25,8 +25,11 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
+
+        <subethasmtp.version>6.0.6</subethasmtp.version>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -53,6 +56,12 @@
                 <groupId>org.seal</groupId>
                 <artifactId>re-wiser-starter</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.davidmoten</groupId>
+                <artifactId>subethasmtp</artifactId>
+                <version>${subethasmtp.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
