@@ -1,10 +1,10 @@
-package org.seal.wiser.test;
+package org.seal.wiser.example;
 
 /*-
  * #%L
- * re-wiser-test
+ * io.github.mad-seal:re-wiser-example
  * %%
- * Copyright (C) 2022 authors
+ * Copyright (C) 2022 - 2023 author or authors
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ package org.seal.wiser.test;
  * #L%
  */
 
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -32,13 +33,13 @@ import jakarta.mail.internet.MimeMessage;
 import java.io.File;
 
 @RestController
-public class TestController {
+public class ExampleDataController {
 
     private JavaMailSenderImpl client;
     @Value("madseal-logo.jpg")
     private File file;
 
-    public TestController() {
+    public ExampleDataController() {
         JavaMailSenderImpl client = new JavaMailSenderImpl();
         client.setHost("localhost");
         client.setPort(25);

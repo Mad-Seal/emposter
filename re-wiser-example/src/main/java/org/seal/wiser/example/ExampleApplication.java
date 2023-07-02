@@ -1,10 +1,10 @@
-package org.seal.wiser.test;
+package org.seal.wiser.example;
 
 /*-
  * #%L
- * re-wiser-test
+ * io.github.mad-seal:re-wiser-example
  * %%
- * Copyright (C) 2022 authors
+ * Copyright (C) 2022 - 2023 author or authors
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestApplication {
+public class ExampleApplication {
     public static void main(String[] args) {
-        SpringApplication.run(TestApplication.class, args);
+        SpringApplication.run(ExampleApplication.class, args);
     }
 }

@@ -4,20 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>wiser-spring</artifactId>
-        <groupId>org.seal</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>io.github.mad-seal</groupId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>re-wiser-starter</artifactId>
 
+    <name>${project.groupId}:${project.artifactId}</name>
+
     <dependencies>
         <dependency>
-            <groupId>org.seal</groupId>
+            <groupId>io.github.mad-seal</groupId>
             <artifactId>re-wiser-spring</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.seal</groupId>
+            <groupId>io.github.mad-seal</groupId>
             <artifactId>re-wiser-web</artifactId>
         </dependency>
     </dependencies>
