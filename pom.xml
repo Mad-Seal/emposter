@@ -10,7 +10,7 @@
         <module>re-wiser-jpa</module>
         <module>re-wiser-starter</module>
         <module>re-wiser-spring</module>
-        <module>re-wiser-test</module>
+        <module>re-wiser-example</module>
     </modules>
 
     <parent>
@@ -20,9 +20,35 @@
         <relativePath/>
     </parent>
 
-    <groupId>org.seal</groupId>
+    <groupId>io.github.mad-seal</groupId>
     <artifactId>wiser-spring</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Root POM of ${project.name}</description>
+    <url>https://github.com/Mad-Seal/spring-wiser</url>
+
+    <scm>
+        <connection>scm:git:ssh://github.com/mad-seal/spring-wiser.git</connection>
+        <developerConnection>scm:git:ssh://github.com/mad-seal/spring-wiser.git</developerConnection>
+        <url>https://github.com/Mad-Seal/spring-wiser/tree/master</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Lysergid</name>
+            <email>6ikk7j0i@duck.com</email>
+            <organization>Mad Seal</organization>
+            <organizationUrl>https://github.com/Mad-Seal</organizationUrl>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
 
     <properties>
         <java.version>17</java.version>
@@ -33,27 +59,27 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.seal</groupId>
+                <groupId>io.github.mad-seal</groupId>
                 <artifactId>re-wiser</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.seal</groupId>
+                <groupId>io.github.mad-seal</groupId>
                 <artifactId>re-wiser-spring</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.seal</groupId>
+                <groupId>io.github.mad-seal</groupId>
                 <artifactId>re-wiser-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.seal</groupId>
+                <groupId>io.github.mad-seal</groupId>
                 <artifactId>re-wiser-jpa</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.seal</groupId>
+                <groupId>io.github.mad-seal</groupId>
                 <artifactId>re-wiser-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -65,6 +91,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
 
     <build>
         <pluginManagement>
