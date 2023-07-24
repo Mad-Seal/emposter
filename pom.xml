@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>re-wiser</module>
-        <module>re-wiser-web</module>
-        <module>re-wiser-jpa</module>
-        <module>re-wiser-starter</module>
-        <module>re-wiser-spring</module>
-        <module>re-wiser-example</module>
+        <module>emposter-core</module>
+        <module>emposter-web</module>
+        <module>emposter-jpa</module>
+        <module>emposter-starter</module>
+        <module>emposter-spring</module>
+        <module>emposter-example</module>
     </modules>
 
     <parent>
@@ -21,17 +21,17 @@
     </parent>
 
     <groupId>io.github.mad-seal</groupId>
-    <artifactId>wiser-spring</artifactId>
+    <artifactId>emposter</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Root POM of ${project.name}</description>
-    <url>https://github.com/Mad-Seal/spring-wiser</url>
+    <url>https://github.com/Mad-Seal/emposter</url>
 
     <scm>
-        <connection>scm:git:ssh://github.com/mad-seal/spring-wiser.git</connection>
-        <developerConnection>scm:git:ssh://github.com/mad-seal/spring-wiser.git</developerConnection>
-        <url>https://github.com/Mad-Seal/spring-wiser/tree/master</url>
+        <connection>scm:git:ssh://github.com/mad-seal/emposter.git</connection>
+        <developerConnection>scm:git:ssh://github.com/mad-seal/emposter.git</developerConnection>
+        <url>https://github.com/Mad-Seal/spring-emposter/tree/master</url>
     </scm>
 
     <developers>
@@ -60,27 +60,27 @@
         <dependencies>
             <dependency>
                 <groupId>io.github.mad-seal</groupId>
-                <artifactId>re-wiser</artifactId>
+                <artifactId>emposter-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mad-seal</groupId>
-                <artifactId>re-wiser-spring</artifactId>
+                <artifactId>emposter-spring</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mad-seal</groupId>
-                <artifactId>re-wiser-web</artifactId>
+                <artifactId>emposter-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mad-seal</groupId>
-                <artifactId>re-wiser-jpa</artifactId>
+                <artifactId>emposter-jpa</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mad-seal</groupId>
-                <artifactId>re-wiser-starter</artifactId>
+                <artifactId>emposter-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
